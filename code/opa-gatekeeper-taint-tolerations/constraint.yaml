@@ -1,0 +1,17 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: RestrictedTaintToleration
+metadata:
+  name: privileged
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    excludedNamespaces:
+    - kube-system
+  parameters:
+    restrictedTaint:
+      key: privileged
+      effect: NoSchedule
+      value: true
+    allowGlobalTolerationMatch: false

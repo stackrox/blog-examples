@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+spec:
+  selector:
+    matchLabels:
+      app: hello-world
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      tolerations:
+      - key: "privileged"
+        value: "true"
+        operator: "Equals"
+        effect: "NoSchedule"
+      containers:
+      - name: hello-world
+        image: gcr.io/google-samples/node-hello:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: "500Mi"
+          requests:
+            memory: "500Mi"
