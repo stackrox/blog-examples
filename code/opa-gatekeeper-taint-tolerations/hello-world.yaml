@@ -17,7 +17,7 @@ spec:
       tolerations:
       - key: "privileged"
         value: "true"
-        operator: "Equals"
+        operator: "Equal"
         effect: "NoSchedule"
       containers:
       - name: hello-world

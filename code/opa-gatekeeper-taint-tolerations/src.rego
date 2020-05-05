@@ -16,14 +16,20 @@ global_tolerations := [key | k := object.get(tolerations[_], "key", "")
 
 default allow_global = false
 allow_global {
-  input.parameters.allowGlobalTolerationMatch == true
+  input.parameters.allowGlobalToleration == true
 }
 
-# Fail if global toleration exists, there's no specific toleration match,
-# and we disallow global tolerations for this taint
+# Fail if matching toleration exists
+violation[{"msg": msg}] {
+  count(global_tolerations) == 0
+  count(matching_tolerations) > 0
+  msg := sprintf("Toleration is not allowed for taint %v", [taint])
+}
+
+# Fail if global toleration exists and we disallow global tolerations for
+# this taint
 violation[{"msg": msg}] {
   count(global_tolerations) > 0
-  count(matching_tolerations) == 0
   not allow_global
   msg := sprintf("Global tolerations not allowed for taint %v", [taint])
 }
