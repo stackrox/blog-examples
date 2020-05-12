@@ -3,7 +3,7 @@
 This is a functional OPA Gatekeeper constraint policy for enforcing allowed
 taint tolerations in pods.
 
-Please see the original blog post at []() for more information on writing
+Please see the [companion blog post](https://stackrox.com/post/2020/05/custom-kubernetes-controls-with-open-policy-agent-opa-part-2/) for more information on writing
 and testing OPA Gatekeeper constraint policies.
 
 ## Basic Usage
